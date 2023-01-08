@@ -1,0 +1,138 @@
+﻿@model OnlineShop.Models.Product
+@{
+    ViewData["Title"] = "Edit";
+}
+<br />
+
+<h2 class="text-info">Edit Product</h2>
+<a asp-action="Index" class="btn btn-primary">Back to List</a>
+<form asp-action="Edit" asp-controller="Products" method="post" enctype="multipart/form-data">
+    <div class="p-4  row text-white">
+        <div asp-validation-summary="All" class="text-danger">
+            <input type="hidden" asp-for="Id" />
+        </div>
+        <h3>@ViewBag.message</h3>
+        <div class="row">
+            <div class="col-md-6">
+                    <div class="form-group row mt-3">
+
+                        <div class="col-2">
+                            <label asp-for="Name"></label>
+                        </div>
+                        <div class="col-8">
+                            <input type="hidden" asp-for="Id" />
+                            <input asp-for="Name" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <div class="col-2">
+                            <label asp-for="Price"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="Price" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
+                   @* <div class="form-group row mt-2">
+                        <div class="col-2">
+                            <label>Product Image</label>
+                        </div>
+                        <div class="col-8">
+                            <input name="fileobj" class="form-control" type="file" />
+                        </div>
+                    </div>*@
+                    <div class="form-group row mt-3">
+                        <div class="col-2">
+                            <label asp-for="ProductColor"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="ProductColor" class="form-control" />
+                        </div>
+                        <span asp-validation-for="ProductColor" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <div class="col-2">
+                            <label asp-for="ProductTypeId"></label>
+                        </div>
+                        <div class="col-8">
+                            <select asp-for="ProductTypeId" asp-items="ViewBag.ProductTypeId" class="form-select"></select>
+                            @*<input asp-for="ProductTypeId" class="form-control"/>*@
+                        </div>
+                        <span asp-validation-for="ProductTypeId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <div class="col-2">
+                            <label asp-for="SpecialTagId"></label>
+                        </div>
+                        <div class="col-8">
+                            <select asp-for="SpecialTagId" asp-items="ViewBag.SpecialTagId" class="form-select"></select>
+                            @*<input asp-for="SpecialTagId" class="form-control" />*@
+                        </div>
+                        <span asp-validation-for="SpecialTagId" class="text-danger"></span>
+                    </div>
+                    <div class="form-group row mt-3">
+                        <div class="col-2">
+                            <label asp-for="IsAvailable"></label>
+                        </div>
+                        <div class="col-8">
+                            <input asp-for="IsAvailable" type="checkbox" />
+                        </div>
+                        <span asp-validation-for="IsAvailable" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-5">
+                    <div>
+                    @if (Model.ImageUrl != null)
+                    {
+                        <div>
+                            <img src="~/images/@Model.ImageUrl" width="300px" height="250px"/>
+                        </div>
+                    }
+                    </div>
+                    <div class="col-md-10 mx-auto">
+                         <input name="fileobj" class="form-control" type="file" />
+                     </div>
+
+                </div>
+            
+            </div>
+
+            <div class="form-group row mt-3">
+                <div class="col-md-1">
+                    <label asp-for="Description"></label>
+                </div>
+                <div class="col-9">
+                <textarea asp-for="Description" id="Description" class="ckeditor form-control" name="Description" rows="200"></textarea>
+                <input type="submit" class="btn btn-warning d-grid gap-2 col-md-12 mt-3" value="Update" />
+                </div>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group row mt-3">
+            <div class="d-grid gap-2 col-md-9 ">
+
+                
+
+            </div>
+            </div>
+            
+        </div>
+
+   
+
+            
+       
+</form>
+
+@section Scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace(‘#Description’);
+        });
+    </script>
